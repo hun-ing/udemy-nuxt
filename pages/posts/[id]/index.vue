@@ -1,12 +1,12 @@
 <template>
   <div class="single-post-page">
     <section class="post">
-      <h1 class="post-title">제목</h1>
+      <h1 class="post-title">{{ loadedPost.title }}</h1>
       <div class="post-details">
-        <div class="post-detail">마지막 업데이트 날짜: xxx</div>
-        <div class="post-detail">작성자: 이름</div>
+        <div class="post-detail">마지막 업데이트 날짜: {{ loadedPost.updatedDate }}</div>
+        <div class="post-detail">작성자: {{ loadedPost.author }}</div>
       </div>
-      <p class="post-content">내용</p>
+      <p class="post-content">{{ loadedPost.content }}</p>
     </section>
     <section class="post-feedback">
       <p>피드백 이메일: <a href="mailto:test@test.com">test@test.com</a>.</p>
@@ -16,6 +16,20 @@
 
 <script setup lang="ts">
 
+const route = useRoute();
+const {data, pending, error, refresh} = await useAsyncData((context) => {
+  return {
+    id: '1',
+    title: `제목1(ID: ${route.params.id})`,
+    author: '작성자1',
+    updatedDate: new Date(),
+    previewText: '미리보기1',
+    content: '내용1',
+    thumbnail: 'https://wikis.krsocsci.org/images/4/4a/%ED%96%84%EC%8A%A4%ED%84%B0.jpg',
+  }
+})
+
+const loadedPost = ref(data.value);
 </script>
 
 <style scoped>

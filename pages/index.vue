@@ -14,7 +14,8 @@ const loadedPosts = ref([])
 
 useAsyncData(
     'posts',
-    () => {
+    (context) => {
+      console.log('context = ', context);
       setTimeout(() => {
         loadedPosts.value = [
           {
@@ -30,7 +31,7 @@ useAsyncData(
             thumbnail: 'https://wikis.krsocsci.org/images/4/4a/%ED%96%84%EC%8A%A4%ED%84%B0.jpg',
           }
         ]
-      }, 1500)
+      }, 500)
     }
 )
 </script>
