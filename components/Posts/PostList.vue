@@ -1,25 +1,13 @@
 <template>
   <section class="post-list">
     <PostPreview
-        id="1"
+        v-for="post of posts"
+        :key="post.id"
+        :id="post.id"
         :is-admin="isAdmin"
-        thumbnail="https://wikis.krsocsci.org/images/4/4a/%ED%96%84%EC%8A%A4%ED%84%B0.jpg"
-        title="Hello there!1"
-        previewText="첫 번째"
-    />
-    <PostPreview
-        id="2"
-        :is-admin="isAdmin"
-        thumbnail="https://wikis.krsocsci.org/images/4/4a/%ED%96%84%EC%8A%A4%ED%84%B0.jpg"
-        title="Hello there!2"
-        previewText="두 번째"
-    />
-    <PostPreview
-        id="3"
-        :is-admin="isAdmin"
-        thumbnail="https://wikis.krsocsci.org/images/4/4a/%ED%96%84%EC%8A%A4%ED%84%B0.jpg"
-        title="Hello there!3"
-        previewText="세 번째"
+        :thumbnail="post.thumbnail"
+        :title="post.title"
+        :previewText="post.previewText"
     />
   </section>
 </template>
@@ -31,6 +19,10 @@ defineProps({
   isAdmin: {
     type: Boolean,
     default: false
+  },
+  posts: {
+    type: Array,
+    required: true
   }
 });
 </script>

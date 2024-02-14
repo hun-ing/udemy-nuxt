@@ -1,11 +1,30 @@
 <template>
   <div class="home-page">
     <section class="intro">
-      <h1>최신 기술 정보</h1>
+      <h1>기술 정보</h1>
     </section>
-    <PostList />
+    <PostList :posts="loadedPosts" />
   </div>
 </template>
+
+<script setup lang="ts">
+import PostList from "~/components/Posts/PostList.vue";
+
+const loadedPosts = ref([
+  {
+    id: '1',
+    title: '제목1',
+    previewText: '미리보기1',
+    thumbnail: 'https://wikis.krsocsci.org/images/4/4a/%ED%96%84%EC%8A%A4%ED%84%B0.jpg',
+  },
+  {
+    id: '2',
+    title: '제목2',
+    previewText: '미리보기2',
+    thumbnail: 'https://wikis.krsocsci.org/images/4/4a/%ED%96%84%EC%8A%A4%ED%84%B0.jpg',
+  },
+])
+</script>
 
 <style scoped>
 .intro {
@@ -48,7 +67,3 @@
   justify-content: center;
 }
 </style>
-<script setup lang="ts">
-import PostPreview from "~/components/Posts/PostPreview.vue";
-import PostList from "~/components/Posts/PostList.vue";
-</script>
