@@ -4,11 +4,15 @@
 
     <AppControlInput v-model="editedPost.title">Title</AppControlInput>
 
-    <AppControlInput v-model="editedPost.thumbnailLink">Thumbnail Link</AppControlInput>
+    <AppControlInput v-model="editedPost.thumbnail">Thumbnail Link</AppControlInput>
 
     <AppControlInput
         control-type="textarea"
         v-model="editedPost.content">Content</AppControlInput>
+
+    <AppControlInput
+        control-type="textarea"
+        v-model="editedPost.previewText">Content</AppControlInput>
 
     <AppButton type="submit">Save</AppButton>
 
@@ -36,8 +40,9 @@ const props = defineProps({
 const editedPost = ref( props.post ? { ...props.post } : {
   author: '',
   title: '',
-  thumbnailLink: '',
+  thumbnail: '',
   content: '',
+  previewText: '',
 })
 
 const emits = defineEmits(['submit']);

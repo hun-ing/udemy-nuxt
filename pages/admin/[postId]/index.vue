@@ -14,7 +14,7 @@ const loadedPost = ref({
   author: '테스트',
   title: '제목1',
   content: '내용1',
-  thumbnailLink: 'https://wikis.krsocsci.org/images/4/4a/%ED%96%84%EC%8A%A4%ED%84%B0.jpg',
+  thumbnail: 'https://wikis.krsocsci.org/images/4/4a/%ED%96%84%EC%8A%A4%ED%84%B0.jpg',
 })
 </script>
 

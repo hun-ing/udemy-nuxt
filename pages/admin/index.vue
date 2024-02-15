@@ -5,7 +5,7 @@
     </section>
     <section class="existing-posts">
       <h1>글 목록</h1>
-      <PostList is-admin />
+      <PostList is-admin :posts="loadedPosts" />
     </section>
   </div>
 
@@ -19,6 +19,9 @@ const router = useRouter();
 definePageMeta({
   layout: 'admin'
 })
+
+const createStore = useCreateStore();
+const loadedPosts = createStore.getLoadedPosts;
 </script>
 
 <style scoped>
