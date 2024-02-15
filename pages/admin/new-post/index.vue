@@ -11,15 +11,9 @@ definePageMeta({
   layout: 'admin'
 })
 
-const onSubmitted = async (postData) => {
-  console.log('postData = ', postData);
-  const {data} = await useFetch('http://localhost:8080/api/post', {
-    method: 'POST',
-    body: postData
-  })
-
-  console.log('data = ', data.value);
-}
+const router = useRouter();
+const createStore = useCreateStore();
+const onSubmitted = (postData) => createStore.addPost(postData).then(() => router.push('/admin'));
 </script>
 
 <style scoped>

@@ -1,7 +1,7 @@
 <template>
   <div class="admin-post-page">
     <section class="update-form">
-      <AdminPostForm :post="loadedPost" />
+      <AdminPostForm :post="loadedPost" @submit="onSubmitted" />
     </section>
   </div>
 </template>
@@ -10,12 +10,15 @@
 definePageMeta({
   layout: 'admin'
 })
-const loadedPost = ref({
-  author: '테스트',
-  title: '제목1',
-  content: '내용1',
-  thumbnail: 'https://wikis.krsocsci.org/images/4/4a/%ED%96%84%EC%8A%A4%ED%84%B0.jpg',
-})
+
+const route = useRoute();
+const router = useRouter();
+
+const {data, pending, error, refresh} = await useAsyncData(async () => $fetch(`http://localhost:8080/api/post/${route.params.postId}`));
+const loadedPost = ref(data.value);
+
+const createStore = useCreateStore();
+const onSubmitted = (editedPost) => createStore.editPost(editedPost).then(() => router.push('/admin'));
 </script>
 
 <style scoped>

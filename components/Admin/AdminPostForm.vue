@@ -40,7 +40,7 @@ const props = defineProps({
 const editedPost = ref( props.post ? { ...props.post } : {
   author: '',
   title: '',
-  thumbnail: '',
+  thumbnail: 'https://wikis.krsocsci.org/images/4/4a/%ED%96%84%EC%8A%A4%ED%84%B0.jpg',
   content: '',
   previewText: '',
 })
