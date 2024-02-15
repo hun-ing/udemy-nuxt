@@ -15,17 +15,27 @@
 </template>
 
 <script setup lang="ts">
-const {data, pending, error, refresh} = await useAsyncData((context) => {
-  return {
-    id: '1',
-    title: `제목1(ID: ${context._route.params.id})`,
-    author: '작성자1',
-    updatedDate: new Date(),
-    previewText: '미리보기1',
-    content: '내용1',
-    thumbnail: 'https://wikis.krsocsci.org/images/4/4a/%ED%96%84%EC%8A%A4%ED%84%B0.jpg',
-  }
+console.log('start!!');
+let route = useRoute();
+const {data, pending, error, refresh} = await useAsyncData(async (context) => {
+  return new Promise((resolve, reject) => {
+    resolve({
+      id: '1',
+      title: `제목1(ID: ${route.params.id})`,
+      author: '작성자1',
+      updatedDate: new Date(),
+      previewText: '미리보기1',
+      content: '내용1',
+      thumbnail: 'https://wikis.krsocsci.org/images/4/4a/%ED%96%84%EC%8A%A4%ED%84%B0.jpg',
+    }); // 와! 문제 없음!
+  }).then(data => {
+    return data;
+  }).catch(error => {
+    console.log(error);
+  })
 })
+
+console.log('end!!');
 
 const loadedPost = ref(data.value);
 </script>

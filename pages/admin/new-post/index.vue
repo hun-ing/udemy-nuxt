@@ -1,7 +1,7 @@
 <template>
   <div class="admin-new-post-page">
     <section class="new-post-form">
-      <AdminPostForm />
+      <AdminPostForm @submit="onSubmitted" />
     </section>
   </div>
 </template>
@@ -10,6 +10,16 @@
 definePageMeta({
   layout: 'admin'
 })
+
+const onSubmitted = async (postData) => {
+  console.log('postData = ', postData);
+  const {data} = await useFetch('http://localhost:8080/api/post', {
+    method: 'POST',
+    body: postData
+  })
+
+  console.log('data = ', data.value);
+}
 </script>
 
 <style scoped>

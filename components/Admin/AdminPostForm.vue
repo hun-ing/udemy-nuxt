@@ -40,7 +40,8 @@ const editedPost = ref( props.post ? { ...props.post } : {
   content: '',
 })
 
-const onSave = () => console.log(editedPost.value);
+const emits = defineEmits(['submit']);
+const onSave = () => emits('submit', editedPost);
 const onCancel = () => router.push('/admin');
 </script>
 
