@@ -1,6 +1,7 @@
 const pkg = require('./package')
 export default defineNuxtConfig({
     devtools: {enabled: true},
+    modules: ['@pinia/nuxt'],
     app: {
         head: {
             title: pkg.name,

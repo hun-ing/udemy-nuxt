@@ -10,30 +10,8 @@
 <script setup lang="ts">
 import PostList from "~/components/Posts/PostList.vue";
 
-const loadedPosts = ref([])
-
-useAsyncData(
-    'posts',
-    (context) => {
-      console.log('context = ', context);
-      setTimeout(() => {
-        loadedPosts.value = [
-          {
-            id: '1',
-            title: '제목1',
-            previewText: '미리보기1',
-            thumbnail: 'https://wikis.krsocsci.org/images/4/4a/%ED%96%84%EC%8A%A4%ED%84%B0.jpg',
-          },
-          {
-            id: '2',
-            title: '제목2',
-            previewText: '미리보기2',
-            thumbnail: 'https://wikis.krsocsci.org/images/4/4a/%ED%96%84%EC%8A%A4%ED%84%B0.jpg',
-          }
-        ]
-      }, 500)
-    }
-)
+const createStore = useCreateStore();
+const loadedPosts = createStore.getLoadedPosts;
 </script>
 
 

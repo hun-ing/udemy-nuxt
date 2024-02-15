@@ -15,12 +15,10 @@
 </template>
 
 <script setup lang="ts">
-
-const route = useRoute();
 const {data, pending, error, refresh} = await useAsyncData((context) => {
   return {
     id: '1',
-    title: `제목1(ID: ${route.params.id})`,
+    title: `제목1(ID: ${context._route.params.id})`,
     author: '작성자1',
     updatedDate: new Date(),
     previewText: '미리보기1',
