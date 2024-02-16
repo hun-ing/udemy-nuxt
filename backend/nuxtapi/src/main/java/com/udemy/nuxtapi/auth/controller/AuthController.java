@@ -17,6 +17,9 @@ public class AuthController {
     String authorization = header.getFirst(HttpHeaders.AUTHORIZATION);
     System.out.println("requestBody = " + requestBody);
     System.out.println("authorization = " + authorization);
-    return ResponseEntity.ok().build();
+    return ResponseEntity.ok().headers(httpHeaders -> {
+        httpHeaders.add(HttpHeaders.AUTHORIZATION, "123123123");
+      })
+      .body(requestBody);
   }
 }
