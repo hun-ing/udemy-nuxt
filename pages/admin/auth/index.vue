@@ -1,25 +1,45 @@
 <template>
   <div class="admin-auth-page">
     <div class="auth-container">
-      <form>
-        <UIAppControlInput type="email">E-Mail Address</UIAppControlInput>
-        <UIAppControlInput type="password">Password</UIAppControlInput>
-        <UIAppButton type="submit">{{ isLogin ? 'Login' : 'Sign Up' }}</UIAppButton>
+      <form @submit.prevent="onSubmit">
+        <UIAppControlInput type="email" v-model="login.email">E-Mail Address</UIAppControlInput>
+        <UIAppControlInput type="password" v-model="login.password">Password</UIAppControlInput>
+        <UIAppButton type="submit">{{ login.isLogin ? 'Login' : 'Sign Up' }}</UIAppButton>
         <UIAppButton
             type="button"
             btn-style="inverted"
             style="margin-left: 10px"
-            @click="isLogin = !isLogin">Switch to {{ isLogin ? 'Signup' : 'Login' }}</UIAppButton>
+            @click="login.isLogin = !login.isLogin">Switch to {{ login.isLogin ? 'Signup' : 'Login' }}</UIAppButton>
       </form>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-const isLogin = ref(true);
+const login = ref({
+  isLogin: true,
+  email: '',
+  password: '',
+});
 definePageMeta({
   layout: 'admin'
 })
+
+const runtimeConfig = useRuntimeConfig();
+const onSubmit = async () => {
+  const {data} = await useFetch(`${runtimeConfig.public.apiBase}/api/auth/sign-up`, {
+    method: 'POST',
+    headers: {
+      Authorization: 'test'
+    },
+    body: {
+      email: login.value.email,
+      password: login.value.password
+    }
+  })
+
+  console.log('data = ', data.value);
+}
 </script>
 
 <style scoped>
