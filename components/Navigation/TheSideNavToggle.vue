@@ -11,7 +11,7 @@
 
 <script setup lang="ts">
 let emits = defineEmits(['toggle']);
-const bodyClickEvent = (e) => emits('toggle');
+const bodyClickEvent = () => emits('toggle');
 </script>
 
 <style scoped>

@@ -2,23 +2,20 @@
   <div class="admin-auth-page">
     <div class="auth-container">
       <form>
-        <AppControlInput type="email">E-Mail Address</AppControlInput>
-        <AppControlInput type="password">Password</AppControlInput>
-        <AppButton type="submit">{{ isLogin ? 'Login' : 'Sign Up' }}</AppButton>
-        <AppButton
+        <UIAppControlInput type="email">E-Mail Address</UIAppControlInput>
+        <UIAppControlInput type="password">Password</UIAppControlInput>
+        <UIAppButton type="submit">{{ isLogin ? 'Login' : 'Sign Up' }}</UIAppButton>
+        <UIAppButton
             type="button"
             btn-style="inverted"
             style="margin-left: 10px"
-            @click="isLogin = !isLogin">Switch to {{ isLogin ? 'Signup' : 'Login' }}</AppButton>
+            @click="isLogin = !isLogin">Switch to {{ isLogin ? 'Signup' : 'Login' }}</UIAppButton>
       </form>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import AppControlInput from '@/components/UI/AppControlInput'
-import AppButton from '@/components/UI/AppButton'
-
 const isLogin = ref(true);
 definePageMeta({
   layout: 'admin'

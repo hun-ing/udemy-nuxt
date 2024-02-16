@@ -1,35 +1,32 @@
 <template>
   <form @submit.prevent="onSave">
-    <AppControlInput v-model="editedPost.author">Author Name</AppControlInput>
+    <UIAppControlInput v-model="editedPost.author">Author Name</UIAppControlInput>
 
-    <AppControlInput v-model="editedPost.title">Title</AppControlInput>
+    <UIAppControlInput v-model="editedPost.title">Title</UIAppControlInput>
 
-    <AppControlInput v-model="editedPost.thumbnail">Thumbnail Link</AppControlInput>
+    <UIAppControlInput v-model="editedPost.thumbnail">Thumbnail Link</UIAppControlInput>
 
-    <AppControlInput
+    <UIAppControlInput
         control-type="textarea"
-        v-model="editedPost.content">Content</AppControlInput>
+        v-model="editedPost.content">Content</UIAppControlInput>
 
-    <AppControlInput
+    <UIAppControlInput
         control-type="textarea"
-        v-model="editedPost.previewText">Content</AppControlInput>
+        v-model="editedPost.previewText">Content</UIAppControlInput>
 
-    <AppButton type="submit">Save</AppButton>
+    <UIAppButton type="submit">Save</UIAppButton>
 
-    <AppButton
+    <UIAppButton
         type="button"
         style="margin-left: 10px"
         btn-style="cancel"
-        @click="onCancel">Cancel</AppButton>
+        @click="onCancel">Cancel</UIAppButton>
   </form>
 </template>
 
 <script setup lang="ts">
-import AppControlInput from "~/components/UI/AppControlInput.vue";
-import AppButton from "~/components/UI/AppButton.vue";
 
 const router = useRouter();
-
 const props = defineProps({
   post: {
     type: Object,

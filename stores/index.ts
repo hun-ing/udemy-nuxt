@@ -1,6 +1,6 @@
-interface Post {
-    [key: string]: any;
-}
+// interface Post {
+//     [key: string]: any;
+// }
 
 export const useCreateStore = defineStore('createStore', {
     state: () => ({
@@ -11,7 +11,8 @@ export const useCreateStore = defineStore('createStore', {
             this.loadedPosts = posts;
         },
         async addPost(post: Post) {
-            const {data} = await useFetch('http://localhost:8080/api/post', {
+            const runtimeConfig = useRuntimeConfig();
+            const {data} = await useFetch(`${runtimeConfig.public.apiBase}/api/post`, {
                 method: 'POST',
                 body: JSON.stringify({...post.value, updatedDate: new Date()})
             })
@@ -23,7 +24,8 @@ export const useCreateStore = defineStore('createStore', {
             }
         },
         async editPost(editedPost: Post) {
-            const {data, error} = await useFetch('http://localhost:8080/api/post', {
+            const runtimeConfig = useRuntimeConfig();
+            const {data, error} = await useFetch(`${runtimeConfig.public.apiBase}/api/post`, {
                 method: 'PUT',
                 body: JSON.stringify({...editedPost.value, updatedDate: new Date()})
             })

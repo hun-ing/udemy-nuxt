@@ -13,8 +13,8 @@ definePageMeta({
 
 const route = useRoute();
 const router = useRouter();
-
-const {data, pending, error, refresh} = await useAsyncData(async () => $fetch(`http://localhost:8080/api/post/${route.params.postId}`));
+const runtimeConfig = useRuntimeConfig();
+const {data, pending, error, refresh} = await useAsyncData(async () => $fetch(`${runtimeConfig.public.apiBase}/api/post/${route.params.postId}`));
 const loadedPost = ref(data.value);
 
 const createStore = useCreateStore();

@@ -2,8 +2,8 @@
   <div>
 <!--    <Header />-->
 <!--    <h1>기본 레이아웃</h1>-->
-    <TheHeader @sidenav-toggle="headerToggleEvent" />
-    <TheSidenav
+    <NavigationTheHeader @sidenav-toggle="headerToggleEvent" />
+    <NavigationTheSidenav
       :show="displaySidenav"
       @close="closeEvent"
     />
@@ -12,12 +12,13 @@
 </template>
 
 <script setup lang="ts">
-import TheHeader from "~/components/Navigation/TheHeader.vue";
-import TheSidenav from "~/components/Navigation/TheSidenav.vue";
-
 const displaySidenav = ref(false);
-const headerToggleEvent = (): void => displaySidenav.value = !displaySidenav.value;
-const closeEvent = (): void => displaySidenav.value = false;
+const headerToggleEvent = (): void => {
+  displaySidenav.value = !displaySidenav.value;
+};
+const closeEvent = (): void => {
+  displaySidenav.value = false;
+};
 </script>
 
 <style>

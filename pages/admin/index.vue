@@ -1,20 +1,17 @@
 <template>
   <div class="admin-page">
     <section class="new-post">
-      <AppButton @click="router.push('/admin/new-post')">글 생성</AppButton>
+      <UIAppButton @click="router.push('/admin/new-post')">글 생성</UIAppButton>
     </section>
     <section class="existing-posts">
       <h1>글 목록</h1>
-      <PostList is-admin :posts="loadedPosts" />
+      <PostsPostList is-admin :posts="loadedPosts" />
     </section>
   </div>
 
 </template>
 
 <script setup lang="ts">
-import PostList from "~/components/Posts/PostList.vue";
-import AppButton from "~/components/UI/AppButton.vue";
-
 const router = useRouter();
 definePageMeta({
   layout: 'admin'

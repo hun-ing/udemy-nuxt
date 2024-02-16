@@ -1,7 +1,7 @@
 <template>
 <div class="header-container">
   <header class="the-header">
-    <TheSideNavToggle @toggle="handleClickEvent" />
+    <NavigationTheSideNavToggle @toggle="handleClickEvent" />
     <div class="logo">
       <NuxtLink to="/">WD BLOG</NuxtLink>
     </div>
@@ -19,8 +19,6 @@
 </template>
 
 <script setup lang="ts">
-import TheSideNavToggle from "~/components/Navigation/TheSideNavToggle.vue";
-
 let emits = defineEmits(['sidenav-toggle']);
 const handleClickEvent = (e) => emits('sidenav-toggle');
 </script>

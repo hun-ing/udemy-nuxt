@@ -3,7 +3,7 @@
     <section class="post">
       <h1 class="post-title">{{ loadedPost.title }}</h1>
       <div class="post-details">
-        <div class="post-detail">마지막 업데이트 날짜: {{ loadedPost.updatedDate }}</div>
+        <div class="post-detail">마지막 업데이트 날짜: {{ nuxtApp.$date(loadedPost.updatedDate) }}</div>
         <div class="post-detail">작성자: {{ loadedPost.author }}</div>
       </div>
       <p class="post-content">{{ loadedPost.content }}</p>
@@ -15,8 +15,10 @@
 </template>
 
 <script setup lang="ts">
-let route = useRoute();
-const {data, pending, error, refresh} = await useAsyncData(async (context) => $fetch(`http://localhost:8080/api/post/${route.params.id}`));
+const nuxtApp = useNuxtApp();
+const route = useRoute();
+const runtimeConfig = useRuntimeConfig();
+const {data, pending, error, refresh} = await useAsyncData(async (context) => $fetch(`${runtimeConfig.public.apiBase}/api/post/${route.params.id}`));
 const loadedPost = ref(data.value);
 </script>
 
