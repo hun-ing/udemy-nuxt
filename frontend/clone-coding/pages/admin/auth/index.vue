@@ -35,6 +35,13 @@ const onSubmit = async () => {
     body: {
       email: login.value.email,
       password: login.value.password
+    },
+    onResponse({ request, response, options }) {
+      // Process the response data
+      console.log(response.headers.get('Authorization'))
+    },
+    onResponseError({ request, response, options }) {
+      // Handle the response errors
     }
   })
 
