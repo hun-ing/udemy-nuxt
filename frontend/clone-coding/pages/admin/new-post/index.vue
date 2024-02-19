@@ -8,7 +8,8 @@
 
 <script setup lang="ts">
 definePageMeta({
-  layout: 'admin'
+  layout: 'admin',
+  middleware: ['check-auth', 'auth']
 })
 
 const router = useRouter();

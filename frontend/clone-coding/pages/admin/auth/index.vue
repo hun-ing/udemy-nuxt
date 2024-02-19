@@ -9,7 +9,7 @@
             type="button"
             btn-style="inverted"
             style="margin-left: 10px"
-            @click="login.isLogin = !login.isLogin">Switch to {{ login.isLogin ? 'Signup' : 'Login' }}</UIAppButton>
+            @click="loginToggle">Switch to {{ login.isLogin ? 'Signup' : 'Login' }}</UIAppButton>
       </form>
     </div>
   </div>
@@ -21,31 +21,24 @@ const login = ref({
   email: '',
   password: '',
 });
+
 definePageMeta({
   layout: 'admin'
 })
 
-const runtimeConfig = useRuntimeConfig();
-const onSubmit = async () => {
-  const {data} = await useFetch(`${runtimeConfig.public.apiBase}/api/auth/sign-up`, {
-    method: 'POST',
-    headers: {
-      Authorization: 'test'
-    },
-    body: {
-      email: login.value.email,
-      password: login.value.password
-    },
-    onResponse({ request, response, options }) {
-      // Process the response data
-      console.log(response.headers.get('Authorization'))
-    },
-    onResponseError({ request, response, options }) {
-      // Handle the response errors
-    }
-  })
+const createStore = useCreateStore();
+const router = useRouter();
 
-  console.log('data = ', data.value);
+const loginToggle = () => {
+  login.value.isLogin = !login.value.isLogin
+}
+
+const onSubmit = async () => {
+  createStore.authenticationUser({
+    isLogin: login.value.isLogin,
+    email: login.value.email,
+    password: login.value.password,
+  }).then(() => router.push('/admin'));
 }
 </script>
 

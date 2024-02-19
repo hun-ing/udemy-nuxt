@@ -14,7 +14,8 @@
 <script setup lang="ts">
 const router = useRouter();
 definePageMeta({
-  layout: 'admin'
+  layout: 'admin',
+  middleware: ['check-auth', 'auth']
 })
 
 const createStore = useCreateStore();
