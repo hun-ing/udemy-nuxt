@@ -56,13 +56,13 @@ export const useCreateStore = defineStore('createStore', {
                     // Process the response data
                     resToken = response.headers.get('Authorization');
                     localStorage.setItem("token", resToken);
-                    localStorage.setItem("tokenExpiration", (Date.now() + 5000));
+                    localStorage.setItem("tokenExpiration", (Date.now() + 3600000));
                     useCookie(
                         'jwt',
                         {
                             default: () => ({
                                 token: resToken,
-                                expirationDate: (Date.now() + 5000),
+                                expirationDate: (Date.now() + 3600000),
                             }),
                             watch: false,
                         }
@@ -76,26 +76,21 @@ export const useCreateStore = defineStore('createStore', {
             console.log('data = ', data.value);
 
             this.token = resToken;
-            this.setLogoutTimer(5000);
         },
         clearToken() {
-            localStorage.removeItem("token");
-            localStorage.removeItem("tokenExpiration");
+            console.log('start clearToken...')
+            if (process.client) {
+                localStorage.removeItem("token");
+                localStorage.removeItem("tokenExpiration");
+            }
             const cookie = useCookie('jwt');
             cookie.value = null;
             this.token = null;
-        },
-        setLogoutTimer(duration) {
-            setTimeout(() => {
-                this.clearToken();
-            }, duration)
         },
         initAuth(req = null) {
             let token = null;
             let expirationDate = null;
             const cookie = useCookie('jwt');
-
-            console.log('cookie = ', cookie.value);
 
             if (cookie.value) {
                 token = cookie.value.token;
@@ -103,19 +98,20 @@ export const useCreateStore = defineStore('createStore', {
             } else if (process.client) {
                 token = localStorage.getItem('token');
                 expirationDate = localStorage.getItem('tokenExpiration');
-
-                if (!token || Date.now() > Number(expirationDate)) {
-                    return console.log('토큰이 없거나 만료됨');
-                }
-
                 expirationDate = Number(expirationDate);
             } else {
                 return console.log('클라이언트에서 실행되지 않음');
             }
 
+            if (!token || Date.now() > expirationDate) {
+                this.logout();
+                return console.log('토큰이 없거나 만료됨');
+            }
 
-            this.setLogoutTimer(expirationDate - Date.now());
             this.token = token;
+        },
+        logout() {
+            this.clearToken();
         }
     },
     getters: {

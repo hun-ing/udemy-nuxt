@@ -12,9 +12,8 @@ definePageMeta({
   middleware: ['check-auth', 'auth']
 })
 
-const router = useRouter();
 const createStore = useCreateStore();
-const onSubmitted = (postData) => createStore.addPost(postData).then(() => router.push('/admin'));
+const onSubmitted = (postData) => createStore.addPost(postData).then(() => navigateTo('/admin'));
 </script>
 
 <style scoped>

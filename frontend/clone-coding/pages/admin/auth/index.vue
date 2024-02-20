@@ -27,7 +27,6 @@ definePageMeta({
 })
 
 const createStore = useCreateStore();
-const router = useRouter();
 
 const loginToggle = () => {
   login.value.isLogin = !login.value.isLogin
@@ -38,8 +37,22 @@ const onSubmit = async () => {
     isLogin: login.value.isLogin,
     email: login.value.email,
     password: login.value.password,
-  }).then(() => router.push('/admin'));
+  }).then(() => navigateTo('/admin'));
 }
+
+
+const { data, pending, error, refresh, status } = await useFetch('http://localhost:3000/api/track-data', {
+  method: 'POST',
+  body: {
+    data: 'test!!'
+  }
+})
+
+console.log('data = ', data.value);
+console.log('pending = ', pending.value);
+console.log('error = ', error.value);
+console.log('refresh = ', refresh);
+console.log('status = ', status.value);
 </script>
 
 <style scoped>

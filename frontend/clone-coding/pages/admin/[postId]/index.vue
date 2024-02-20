@@ -13,13 +13,12 @@ definePageMeta({
 })
 
 const route = useRoute();
-const router = useRouter();
 const runtimeConfig = useRuntimeConfig();
 const {data, pending, error, refresh} = await useAsyncData(async () => $fetch(`${runtimeConfig.public.apiBase}/api/post/${route.params.postId}`));
 const loadedPost = ref(data.value);
 
 const createStore = useCreateStore();
-const onSubmitted = (editedPost) => createStore.editPost(editedPost).then(() => router.push('/admin'));
+const onSubmitted = (editedPost) => createStore.editPost(editedPost).then(() => navigateTo('/admin'));
 </script>
 
 <style scoped>

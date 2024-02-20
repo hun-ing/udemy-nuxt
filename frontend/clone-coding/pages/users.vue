@@ -7,12 +7,9 @@
 </template>
 
 <script setup lang="ts">
-const route = useRoute();
-const router = useRouter();
-
 const userId = ref('');
 
 function onLoadUser() {
-  router.push({path: `/users/${userId.value}`})
+  navigateTo({path: `/users/${userId.value}`})
 }
 </script>

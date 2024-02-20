@@ -26,7 +26,6 @@
 
 <script setup lang="ts">
 
-const router = useRouter();
 const props = defineProps({
   post: {
     type: Object,
@@ -44,7 +43,7 @@ const editedPost = ref( props.post ? { ...props.post } : {
 
 const emits = defineEmits(['submit']);
 const onSave = () => emits('submit', editedPost);
-const onCancel = () => router.push('/admin');
+const onCancel = () => navigateTo('/admin');
 </script>
 
 <style>
